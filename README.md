@@ -28,3 +28,31 @@ I've seen a problem with the Spotify Lyrics. They're plain, just static colors. 
 
 
 *Inspired by [Beautiful Lyrics](https://github.com/surfbryce/beautiful-lyrics)*
+
+## TypeScript Backend (Express)
+
+This repository now includes a TypeScript backend in [backend/server.ts](backend/server.ts) for lyrics proxying.
+
+### Run
+
+1. Install dependencies
+2. Start backend: `npm run backend`
+3. Health check: `GET /health`
+
+### Environment variables
+
+- `PORT` (default: `3000`)
+- `SPOTIFY_BEARER_TOKEN` (optional fallback if token is not passed in request headers/body)
+- `APPLE_MUSIC_DEVELOPER_TOKEN` (required for Apple lyrics unless passed per request)
+
+### Endpoints
+
+- `POST /query`
+- `POST /spotify/lyrics`
+- `POST /apple/lyrics`
+
+The `POST /query` endpoint is compatible with the existing frontend query contract and supports:
+
+- `operation: "lyrics"` (Spotify first, optional Apple fallback)
+- `operation: "spotifyLyrics"`
+- `operation: "appleLyrics"`
